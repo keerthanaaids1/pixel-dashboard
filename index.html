@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pixel BI — India Sales Dashboard</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-left">
+    <div class="logo">
+      <span class="logo-g">G</span><span class="logo-o1">o</span><span class="logo-o2">o</span><span class="logo-g2">g</span><span class="logo-l">l</span><span class="logo-e">e</span>
+      <span class="logo-pixel">Pixel</span>
+    </div>
+    <div class="header-sub">India Sales Intelligence Dashboard 🇮🇳</div>
+  </div>
+  <div class="header-right">
+    <div class="stat-pill">📱 25 Models</div>
+    <div class="stat-pill">📅 2016–2026</div>
+    <div class="stat-pill green">🇮🇳 India Only</div>
+  </div>
+</header>
+
+<!-- AI BAR -->
+<div class="ai-section">
+  <div class="ai-inner">
+    <div class="ai-icon">🤖</div>
+    <input type="text" id="aiInput" placeholder='Ask anything: "Which 2024 model had highest sales?" or "Compare Pixel 7 and Pixel 8"'/>
+    <button class="ask-btn" onclick="askAI()">
+      <span>Ask AI</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>
+    </button>
+    <label class="csv-btn">
+      📂 CSV
+      <input type="file" id="csvFile" accept=".csv" onchange="handleCSV(event)"/>
+    </label>
+  </div>
+  <div id="aiResponse" class="ai-response hidden"></div>
+</div>
+
+<!-- OVERVIEW CARDS -->
+<div class="cards-section">
+  <div id="overviewCards" class="cards-row"></div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Filter by Year</div>
+      <div id="yearList"></div>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">All Models</div>
+      <div id="modelList"></div>
+    </div>
+  </aside>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- PHONE MODAL -->
+    <div id="phoneModal" class="phone-modal hidden">
+      <div class="modal-card">
+        <button class="modal-close" onclick="closeModal()">✕</button>
+        <div class="modal-inner">
+          <div class="modal-image-side">
+            <div class="phone-display" id="phoneDisplay">
+              <div class="phone-frame">
+                <div class="phone-screen" id="phoneScreen">
+                  <div class="phone-emoji" id="phoneEmoji">📱</div>
+                  <div class="phone-screen-name" id="phoneScreenName"></div>
+                </div>
+                <div class="phone-btn-side"></div>
+              </div>
+            </div>
+            <div class="modal-phone-name" id="modalPhoneName"></div>
+          </div>
+          <div class="modal-details" id="modalDetails"></div>
+        </div>
+        <div class="modal-chart-wrap">
+          <div class="modal-chart-title">📊 Monthly Sales Performance</div>
+          <canvas id="modalChart" height="120"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHARTS GRID -->
+    <div class="charts-grid">
+      <div class="chart-card wide">
+        <div class="chart-card-header">
+          <div class="chart-card-title">📊 Sales Overview</div>
+          <div class="chart-card-sub" id="chartSubTitle">All Models — Total Units</div>
+        </div>
+        <canvas id="salesChart" height="200"></canvas>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div class="chart-card-title">🥧 Revenue Share</div>
+        </div>
+        <canvas id="revenueChart" height="220"></canvas>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div class="chart-card-title">📈 Price: Launch vs Now</div>
+        </div>
+        <canvas id="priceChart" height="220"></canvas>
+      </div>
+      <div class="chart-card wide">
+        <div class="chart-card-header">
+          <div class="chart-card-title">💰 Profit Growth by Year</div>
+        </div>
+        <canvas id="profitChart" height="160"></canvas>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
